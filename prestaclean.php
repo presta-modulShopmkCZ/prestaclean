@@ -30,6 +30,7 @@ if (!defined('_PS_VERSION_')) {
 use PrestaShopBundle\Controller\Admin\Sell\Order\ActionsBarButton;
 
 include_once _PS_MODULE_DIR_ . 'prestaclean/classes/prestaCleanHelper.php';
+include_once _PS_MODULE_DIR_ . 'prestaclean/classes/orderCleaner.php';
 
 class PrestaClean extends Module
 {
