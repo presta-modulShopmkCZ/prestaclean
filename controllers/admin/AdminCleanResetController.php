@@ -33,8 +33,8 @@ class AdminCleanResetController extends ModuleAdminController
         $this->display = 'view';
         $this->bootstrap = true;
         parent::__construct();
-        $this->meta_title = $this->l('Reset center', 'AdminCleanResetController');
-        $this->toolbar_title = $this->l('Reset center', 'AdminCleanResetController');
+        $this->meta_title = $this->module->l('Reset center', 'AdminCleanResetController');
+        $this->toolbar_title = $this->module->l('Reset center', 'AdminCleanResetController');
 
         // If module is not active, then return
         if (!$this->module->active) {
@@ -115,26 +115,26 @@ class AdminCleanResetController extends ModuleAdminController
 
         $CustomerSelectionForm['form'] = [
             'legend' => [
-                'title' => $this->l('Shop reset', 'AdminCleanResetController'),
+                'title' => $this->module->l('Shop reset', 'AdminCleanResetController'),
                 'icon' => 'icon-refresh',
             ],
-            'warning' => $this->l('All customers, orders, carts, features and all others thing related will be permanently erased(like address cart, messages, details)', 'AdminCleanResetController'),
+            'warning' => $this->module->l('All customers, orders, carts, features and all others thing related will be permanently erased(like address cart, messages, details)', 'AdminCleanResetController'),
             'input' => [
                 [
                     'type' => 'switch',
-                    'label' => $this->l('Reset everything'),
+                    'label' => $this->module->l('Reset everything'),
                     'name' => $this->module->config_name . '_WIPE_ALL',
                     'is_bool' => true,
                     'values' => [
                         [
                             'id' => 'active_on',
                             'value' => true,
-                            'label' => $this->l('Enabled'),
+                            'label' => $this->module->l('Enabled'),
                         ],
                         [
                             'id' => 'active_off',
                             'value' => false,
-                            'label' => $this->l('Disabled'),
+                            'label' => $this->module->l('Disabled'),
                         ],
                     ],
                 ],
@@ -144,13 +144,13 @@ class AdminCleanResetController extends ModuleAdminController
                     'type' => 'button',
                     'class' => 'btn-block',
                     'js' => 'this.previousElementSibling.classList.toggle(\'hidden\');this.classList.toggle(\'hidden\')',
-                    'title' => $this->l('Confirm reset ?', 'AdminCleanResetController'),
+                    'title' => $this->module->l('Confirm reset ?', 'AdminCleanResetController'),
                 ],
             ],
             'submit' => [
                 'name' => 'wipe_all',
                 'class' => 'btn btn-block btn-danger hidden wipe_btn',
-                'title' => $this->l('Reset everything !', 'AdminCleanResetController'),
+                'title' => $this->module->l('Reset everything !', 'AdminCleanResetController'),
             ],
         ];
 
@@ -177,7 +177,7 @@ class AdminCleanResetController extends ModuleAdminController
         parent::setMedia($isNewTheme);
 
         Media::addJsDef([
-            'confirmDeleteLang' => $this->l('I understand this action is not reversible, continue ?'),
+            'confirmDeleteLang' => $this->module->l('I understand this action is not reversible, continue ?'),
         ]);
 
         $this->context->controller->addJS(_PS_MODULE_DIR_ . $this->module->name . '/views/js/' . $this->name . '.js');
