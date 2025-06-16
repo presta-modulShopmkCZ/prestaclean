@@ -33,8 +33,8 @@ class AdminCleanCartController extends ModuleAdminController
         $this->display = 'view';
         $this->bootstrap = true;
         parent::__construct();
-        $this->meta_title = $this->l('Carts center', 'AdminCleanCartController');
-        $this->toolbar_title = $this->l('Carts center', 'AdminCleanCartController');
+        $this->meta_title = $this->module->l('Carts center', 'AdminCleanCartController');
+        $this->toolbar_title = $this->module->l('Carts center', 'AdminCleanCartController');
 
         // If module is not active, then return
         if (!$this->module->active) {
@@ -122,48 +122,48 @@ class AdminCleanCartController extends ModuleAdminController
 
         $orderDummyForm['form'] = [
             'legend' => [
-                'title' => $this->l('Create dummy carts', 'AdminCleanCartController'),
+                'title' => $this->module->l('Create dummy carts', 'AdminCleanCartController'),
                 'icon' => 'icon-plus',
             ],
             'input' => [
                 [
                     'type' => 'text',
-                    'label' => $this->l('Amount of dummy carts', 'AdminCleanCartController'),
-                    'desc' => $this->l('50 carts will be created by default if you let empty', 'AdminCleanCartController'),
+                    'label' => $this->module->l('Amount of dummy carts', 'AdminCleanCartController'),
+                    'desc' => $this->module->l('50 carts will be created by default if you let empty', 'AdminCleanCartController'),
                     'name' => $this->module->config_name . '_NUM_DUMMY_CARTS',
                     'col' => 6,
                 ],
             ],
             'submit' => [
                 'name' => 'create_dummy_carts',
-                'title' => $this->l('Create dummy carts', 'AdminCleanCartController'),
+                'title' => $this->module->l('Create dummy carts', 'AdminCleanCartController'),
             ],
         ];
 
         $orderSelectionForm['form'] = [
             'legend' => [
-                'title' => $this->l('Carts delete', 'AdminCleanCartController'),
+                'title' => $this->module->l('Carts delete', 'AdminCleanCartController'),
                 'icon' => 'icon-trash',
             ],
-            'warning' => $this->l('All carts without orders, and all others thing related to carts will be permanently erased if you let all fields empty', 'AdminCleanCartController'),
+            'warning' => $this->module->l('All carts without orders, and all others thing related to carts will be permanently erased if you let all fields empty', 'AdminCleanCartController'),
             'input' => [
                 [
                     'type' => 'text',
-                    'label' => $this->l('Date from', 'AdminCleanCartController'),
+                    'label' => $this->module->l('Date from', 'AdminCleanCartController'),
                     'name' => $this->module->config_name . '_DATE_FROM',
                     'class' => 'date_time',
                     'col' => 6,
                 ],
                 [
                     'type' => 'text',
-                    'label' => $this->l('Date to', 'AdminCleanCartController'),
+                    'label' => $this->module->l('Date to', 'AdminCleanCartController'),
                     'name' => $this->module->config_name . '_DATE_TO',
                     'class' => 'date_time',
                     'col' => 6,
                 ],
                 [
                     'type' => 'select',
-                    'label' => $this->l('Shop', 'AdminCleanCartController'),
+                    'label' => $this->module->l('Shop', 'AdminCleanCartController'),
                     'name' => $this->module->config_name . '_SHOP_CARTS[]',
                     'id' => 'select-shops',
                     'multiple' => true,
@@ -179,13 +179,13 @@ class AdminCleanCartController extends ModuleAdminController
                     'type' => 'button',
                     'class' => 'btn-block',
                     'js' => 'this.previousElementSibling.classList.toggle(\'hidden\');this.classList.toggle(\'hidden\')',
-                    'title' => $this->l('Delete carts ?', 'AdminCleanCartController'),
+                    'title' => $this->module->l('Delete carts ?', 'AdminCleanCartController'),
                 ],
             ],
             'submit' => [
                 'name' => 'delet_carts',
                 'class' => 'btn btn-block btn-danger hidden delete_carts_btn',
-                'title' => $this->l('Delete carts !', 'AdminCleanCartController'),
+                'title' => $this->module->l('Delete carts !', 'AdminCleanCartController'),
             ],
         ];
 
@@ -216,7 +216,7 @@ class AdminCleanCartController extends ModuleAdminController
         parent::setMedia($isNewTheme);
 
         Media::addJsDef([
-            'confirmDeleteLang' => $this->l('I understand this action is not reversible, continue ?'),
+            'confirmDeleteLang' => $this->module->l('I understand this action is not reversible, continue ?'),
         ]);
 
         $this->context->controller->addJS(_PS_MODULE_DIR_ . $this->module->name . '/views/js/plugins/tom-select.complete.min.js');
