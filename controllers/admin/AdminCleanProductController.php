@@ -33,8 +33,8 @@ class AdminCleanProductController extends ModuleAdminController
         $this->display = 'view';
         $this->bootstrap = true;
         parent::__construct();
-        $this->meta_title = $this->l('Products center', 'AdminCleanProductController');
-        $this->toolbar_title = $this->l('Products center', 'AdminCleanProductController');
+        $this->meta_title = $this->module->l('Products center', 'AdminCleanProductController');
+        $this->toolbar_title = $this->module->l('Products center', 'AdminCleanProductController');
 
         // If module is not active, then return
         if (!$this->module->active) {
@@ -124,48 +124,48 @@ class AdminCleanProductController extends ModuleAdminController
 
         $productDummyForm['form'] = [
             'legend' => [
-                'title' => $this->l('Create dummy products', 'AdminCleanProductController'),
+                'title' => $this->module->l('Create dummy products', 'AdminCleanProductController'),
                 'icon' => 'icon-plus',
             ],
             'input' => [
                 [
                     'type' => 'text',
-                    'label' => $this->l('Amount of dummy products', 'AdminCleanProductController'),
-                    'desc' => $this->l('50 products will be created by default if you let empty', 'AdminCleanProductController'),
+                    'label' => $this->module->l('Amount of dummy products', 'AdminCleanProductController'),
+                    'desc' => $this->module->l('50 products will be created by default if you let empty', 'AdminCleanProductController'),
                     'name' => $this->module->config_name . '_NUM_DUMMY_PRODUCTS',
                     'col' => 6,
                 ],
             ],
             'submit' => [
                 'name' => 'create_dummy_products',
-                'title' => $this->l('Create dummy products', 'AdminCleanProductController'),
+                'title' => $this->module->l('Create dummy products', 'AdminCleanProductController'),
             ],
         ];
 
         $productSelectionForm['form'] = [
             'legend' => [
-                'title' => $this->l('Products delete', 'AdminCleanProductController'),
+                'title' => $this->module->l('Products delete', 'AdminCleanProductController'),
                 'icon' => 'icon-trash',
             ],
-            'warning' => $this->l('All products, and all others thing related to products will be permanently erased if you let all fields empty', 'AdminCleanProductController'),
+            'warning' => $this->module->l('All products, and all others thing related to products will be permanently erased if you let all fields empty', 'AdminCleanProductController'),
             'input' => [
                 [
                     'type' => 'text',
-                    'label' => $this->l('Date from', 'AdminCleanProductController'),
+                    'label' => $this->module->l('Date from', 'AdminCleanProductController'),
                     'name' => $this->module->config_name . '_PRODUCT_DATE_FROM',
                     'class' => 'date_time',
                     'col' => 6,
                 ],
                 [
                     'type' => 'text',
-                    'label' => $this->l('Date to', 'AdminCleanProductController'),
+                    'label' => $this->module->l('Date to', 'AdminCleanProductController'),
                     'name' => $this->module->config_name . '_PRODUCT_DATE_TO',
                     'class' => 'date_time',
                     'col' => 6,
                 ],
                 [
                     'type' => 'select',
-                    'label' => $this->l('Shop', 'AdminCleanOrderController'),
+                    'label' => $this->module->l('Shop', 'AdminCleanOrderController'),
                     'name' => $this->module->config_name . '_PRODUCT_SHOP[]',
                     'id' => 'select-shops',
                     'multiple' => true,
@@ -177,7 +177,7 @@ class AdminCleanProductController extends ModuleAdminController
                 ],
                 [
                     'type' => 'select',
-                    'label' => $this->l('Type', 'AdminCleanOrderController'),
+                    'label' => $this->module->l('Type', 'AdminCleanOrderController'),
                     'name' => $this->module->config_name . '_PRODUCT_TYPE[]',
                     'id' => 'select-types',
                     'multiple' => true,
@@ -185,19 +185,19 @@ class AdminCleanProductController extends ModuleAdminController
                         'query' => [
                             [
                                 'type' => 'standard',
-                                'name' => $this->l('Standard', 'AdminCleanProductController'),
+                                'name' => $this->module->l('Standard', 'AdminCleanProductController'),
                             ],
                             [
                                 'type' => 'combinations',
-                                'name' => $this->l('Combination', 'AdminCleanProductController'),
+                                'name' => $this->module->l('Combination', 'AdminCleanProductController'),
                             ],
                             [
                                 'type' => 'pack',
-                                'name' => $this->l('Pack', 'AdminCleanProductController'),
+                                'name' => $this->module->l('Pack', 'AdminCleanProductController'),
                             ],
                             [
                                 'type' => 'virtual',
-                                'name' => $this->l('Virtual', 'AdminCleanProductController'),
+                                'name' => $this->module->l('Virtual', 'AdminCleanProductController'),
                             ],
                         ],
                         'id' => 'type',
@@ -206,7 +206,7 @@ class AdminCleanProductController extends ModuleAdminController
                 ],
                 [
                     'type' => 'categories',
-                    'label' => $this->l('Categories', 'AdminCleanOrderController'),
+                    'label' => $this->module->l('Categories', 'AdminCleanOrderController'),
                     'name' => $this->module->config_name . '_PRODUCT_CATEGORIES[]',
                     'tree' => [
                         'root_category' => (int) Category::getRootCategory()->id,
@@ -218,19 +218,19 @@ class AdminCleanProductController extends ModuleAdminController
                 ],
                 [
                     'type' => 'switch',
-                    'label' => $this->l('Active'),
+                    'label' => $this->module->l('Active'),
                     'name' => $this->module->config_name . '_PRODUCT_ACTIVE',
                     'is_bool' => true,
                     'values' => [
                         [
                             'id' => 'active_on',
                             'value' => true,
-                            'label' => $this->l('Enabled'),
+                            'label' => $this->module->l('Enabled'),
                         ],
                         [
                             'id' => 'active_off',
                             'value' => false,
-                            'label' => $this->l('Disabled'),
+                            'label' => $this->module->l('Disabled'),
                         ],
                     ],
                 ],
@@ -240,13 +240,13 @@ class AdminCleanProductController extends ModuleAdminController
                     'type' => 'button',
                     'class' => 'btn-block',
                     'js' => 'this.previousElementSibling.classList.toggle(\'hidden\');this.classList.toggle(\'hidden\')',
-                    'title' => $this->l('Delete products ?', 'AdminCleanProductController'),
+                    'title' => $this->module->l('Delete products ?', 'AdminCleanProductController'),
                 ],
             ],
             'submit' => [
                 'name' => 'delete_products',
                 'class' => 'btn btn-block btn-danger hidden delete_products_btn',
-                'title' => $this->l('Delete products !', 'AdminCleanProductController'),
+                'title' => $this->module->l('Delete products !', 'AdminCleanProductController'),
             ],
         ];
 
@@ -280,7 +280,7 @@ class AdminCleanProductController extends ModuleAdminController
         parent::setMedia($isNewTheme);
 
         Media::addJsDef([
-            'confirmDeleteLang' => $this->l('I understand this action is not reversible, continue ?'),
+            'confirmDeleteLang' => $this->module->l('I understand this action is not reversible, continue ?'),
         ]);
 
         $this->context->controller->addJS(_PS_MODULE_DIR_ . $this->module->name . '/views/js/plugins/tom-select.complete.min.js');
