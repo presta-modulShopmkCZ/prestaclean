@@ -33,8 +33,8 @@ class AdminCleanOrderController extends ModuleAdminController
         $this->display = 'view';
         $this->bootstrap = true;
         parent::__construct();
-        $this->meta_title = $this->l('Orders center', 'AdminCleanOrderController');
-        $this->toolbar_title = $this->l('Orders center', 'AdminCleanOrderController');
+        $this->meta_title = $this->module->l('Orders center', 'AdminCleanOrderController');
+        $this->toolbar_title = $this->module->l('Orders center', 'AdminCleanOrderController');
 
         // If module is not active, then return
         if (!$this->module->active) {
@@ -123,48 +123,48 @@ class AdminCleanOrderController extends ModuleAdminController
 
         $orderDummyForm['form'] = [
             'legend' => [
-                'title' => $this->l('Create dummy orders', 'AdminCleanOrderController'),
+                'title' => $this->module->l('Create dummy orders', 'AdminCleanOrderController'),
                 'icon' => 'icon-plus',
             ],
             'input' => [
                 [
                     'type' => 'text',
-                    'label' => $this->l('Amount of dummy orders', 'AdminCleanOrderController'),
-                    'desc' => $this->l('50 orders will be created by default if you let empty', 'AdminCleanOrderController'),
+                    'label' => $this->module->l('Amount of dummy orders', 'AdminCleanOrderController'),
+                    'desc' => $this->module->l('50 orders will be created by default if you let empty', 'AdminCleanOrderController'),
                     'name' => $this->module->config_name . '_NUM_DUMMY_ORDERS',
                     'col' => 6,
                 ],
             ],
             'submit' => [
                 'name' => 'create_dummy_orders',
-                'title' => $this->l('Create dummy orders', 'AdminCleanOrderController'),
+                'title' => $this->module->l('Create dummy orders', 'AdminCleanOrderController'),
             ],
         ];
 
         $orderSelectionForm['form'] = [
             'legend' => [
-                'title' => $this->l('Orders delete', 'AdminCleanOrderController'),
+                'title' => $this->module->l('Orders delete', 'AdminCleanOrderController'),
                 'icon' => 'icon-trash',
             ],
-            'warning' => $this->l('All orders, and all others thing related to orders will be permanently erased(like orders invoices, messages, details) if you let all fields empty', 'AdminCleanOrderController'),
+            'warning' => $this->module->l('All orders, and all others thing related to orders will be permanently erased(like orders invoices, messages, details) if you let all fields empty', 'AdminCleanOrderController'),
             'input' => [
                 [
                     'type' => 'text',
-                    'label' => $this->l('Date from', 'AdminCleanOrderController'),
+                    'label' => $this->module->l('Date from', 'AdminCleanOrderController'),
                     'name' => $this->module->config_name . '_DATE_FROM',
                     'class' => 'date_time',
                     'col' => 6,
                 ],
                 [
                     'type' => 'text',
-                    'label' => $this->l('Date to', 'AdminCleanOrderController'),
+                    'label' => $this->module->l('Date to', 'AdminCleanOrderController'),
                     'name' => $this->module->config_name . '_DATE_TO',
                     'class' => 'date_time',
                     'col' => 6,
                 ],
                 [
                     'type' => 'select',
-                    'label' => $this->l('Status', 'AdminCleanOrderController'),
+                    'label' => $this->module->l('Status', 'AdminCleanOrderController'),
                     'name' => $this->module->config_name . '_STATUS[]',
                     'id' => 'select-status',
                     'multiple' => true,
@@ -176,7 +176,7 @@ class AdminCleanOrderController extends ModuleAdminController
                 ],
                 [
                     'type' => 'select',
-                    'label' => $this->l('Shop', 'AdminCleanOrderController'),
+                    'label' => $this->module->l('Shop', 'AdminCleanOrderController'),
                     'name' => $this->module->config_name . '_SHOP_ORDERS[]',
                     'id' => 'select-shops',
                     'multiple' => true,
@@ -192,13 +192,13 @@ class AdminCleanOrderController extends ModuleAdminController
                     'type' => 'button',
                     'class' => 'btn-block',
                     'js' => 'this.previousElementSibling.classList.toggle(\'hidden\');this.classList.toggle(\'hidden\')',
-                    'title' => $this->l('Delete orders ?', 'AdminCleanOrderController'),
+                    'title' => $this->module->l('Delete orders ?', 'AdminCleanOrderController'),
                 ],
             ],
             'submit' => [
                 'name' => 'delete_orders',
                 'class' => 'btn btn-block btn-danger hidden delete_orders_btn',
-                'title' => $this->l('Delete orders !', 'AdminCleanOrderController'),
+                'title' => $this->module->l('Delete orders !', 'AdminCleanOrderController'),
             ],
         ];
 
@@ -230,7 +230,7 @@ class AdminCleanOrderController extends ModuleAdminController
         parent::setMedia($isNewTheme);
 
         Media::addJsDef([
-            'confirmDeleteLang' => $this->l('I understand this action is not reversible, continue ?'),
+            'confirmDeleteLang' => $this->module->l('I understand this action is not reversible, continue ?'),
         ]);
 
         $this->context->controller->addJS(_PS_MODULE_DIR_ . $this->module->name . '/views/js/plugins/tom-select.complete.min.js');
