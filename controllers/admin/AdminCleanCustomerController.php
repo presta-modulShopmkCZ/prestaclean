@@ -33,8 +33,8 @@ class AdminCleanCustomerController extends ModuleAdminController
         $this->display = 'view';
         $this->bootstrap = true;
         parent::__construct();
-        $this->meta_title = $this->l('Customers center', 'AdminCleanCustomerController');
-        $this->toolbar_title = $this->l('Customers center', 'AdminCleanCustomerController');
+        $this->meta_title = $this->module->l('Customers center', 'AdminCleanCustomerController');
+        $this->toolbar_title = $this->module->l('Customers center', 'AdminCleanCustomerController');
 
         // If module is not active, then return
         if (!$this->module->active) {
@@ -123,48 +123,48 @@ class AdminCleanCustomerController extends ModuleAdminController
 
         $customerDummyForm['form'] = [
             'legend' => [
-                'title' => $this->l('Create dummy customers', 'AdminCleanCustomerController'),
+                'title' => $this->module->l('Create dummy customers', 'AdminCleanCustomerController'),
                 'icon' => 'icon-plus',
             ],
             'input' => [
                 [
                     'type' => 'text',
-                    'label' => $this->l('Amount of dummy customers', 'AdminCleanCustomerController'),
-                    'desc' => $this->l('50 customers will be created by default if you let empty', 'AdminCleanCustomerController'),
+                    'label' => $this->module->l('Amount of dummy customers', 'AdminCleanCustomerController'),
+                    'desc' => $this->module->l('50 customers will be created by default if you let empty', 'AdminCleanCustomerController'),
                     'name' => $this->module->config_name . '_NUM_DUMMY_CUSTOMERS',
                     'col' => 6,
                 ],
             ],
             'submit' => [
                 'name' => 'create_dummy_customers',
-                'title' => $this->l('Create dummy customers', 'AdminCleanCustomerController'),
+                'title' => $this->module->l('Create dummy customers', 'AdminCleanCustomerController'),
             ],
         ];
 
         $CustomerSelectionForm['form'] = [
             'legend' => [
-                'title' => $this->l('Customers delete', 'AdminCleanCustomerController'),
+                'title' => $this->module->l('Customers delete', 'AdminCleanCustomerController'),
                 'icon' => 'icon-trash',
             ],
-            'warning' => $this->l('All customers, and all others thing related to customers will be permanently erased(like address cart, messages, details) if you let all fields empty', 'AdminCleanCustomerController'),
+            'warning' => $this->module->l('All customers, and all others thing related to customers will be permanently erased(like address cart, messages, details) if you let all fields empty', 'AdminCleanCustomerController'),
             'input' => [
                 [
                     'type' => 'text',
-                    'label' => $this->l('Date from', 'AdminCleanCustomerController'),
+                    'label' => $this->module->l('Date from', 'AdminCleanCustomerController'),
                     'name' => $this->module->config_name . '_CUSTOMER_DATE_FROM',
                     'class' => 'date_time',
                     'col' => 6,
                 ],
                 [
                     'type' => 'text',
-                    'label' => $this->l('Date to', 'AdminCleanCustomerController'),
+                    'label' => $this->module->l('Date to', 'AdminCleanCustomerController'),
                     'name' => $this->module->config_name . '_CUSTOMER_DATE_TO',
                     'class' => 'date_time',
                     'col' => 6,
                 ],
                 [
                     'type' => 'select',
-                    'label' => $this->l('Shop', 'AdminCleanOrderController'),
+                    'label' => $this->module->l('Shop', 'AdminCleanOrderController'),
                     'name' => $this->module->config_name . '_CUSTOMER_SHOP[]',
                     'id' => 'select-shops',
                     'multiple' => true,
@@ -176,37 +176,37 @@ class AdminCleanCustomerController extends ModuleAdminController
                 ],
                 [
                     'type' => 'switch',
-                    'label' => $this->l('Guest'),
+                    'label' => $this->module->l('Guest'),
                     'name' => $this->module->config_name . '_CUSTOMER_GUEST',
                     'is_bool' => true,
                     'values' => [
                         [
                             'id' => 'active_on',
                             'value' => true,
-                            'label' => $this->l('Enabled'),
+                            'label' => $this->module->l('Enabled'),
                         ],
                         [
                             'id' => 'active_off',
                             'value' => false,
-                            'label' => $this->l('Disabled'),
+                            'label' => $this->module->l('Disabled'),
                         ],
                     ],
                 ],
                 [
                     'type' => 'switch',
-                    'label' => $this->l('Never ordered'),
+                    'label' => $this->module->l('Never ordered'),
                     'name' => $this->module->config_name . '_CUSTOMER_NEVER_ORDERED',
                     'is_bool' => true,
                     'values' => [
                         [
                             'id' => 'active_on',
                             'value' => true,
-                            'label' => $this->l('Enabled'),
+                            'label' => $this->module->l('Enabled'),
                         ],
                         [
                             'id' => 'active_off',
                             'value' => false,
-                            'label' => $this->l('Disabled'),
+                            'label' => $this->module->l('Disabled'),
                         ],
                     ],
                 ],
@@ -216,13 +216,13 @@ class AdminCleanCustomerController extends ModuleAdminController
                     'type' => 'button',
                     'class' => 'btn-block',
                     'js' => 'this.previousElementSibling.classList.toggle(\'hidden\');this.classList.toggle(\'hidden\')',
-                    'title' => $this->l('Delete customers ?', 'AdminCleanCustomerController'),
+                    'title' => $this->module->l('Delete customers ?', 'AdminCleanCustomerController'),
                 ],
             ],
             'submit' => [
                 'name' => 'delete_customers',
                 'class' => 'btn btn-block btn-danger hidden delete_customers_btn',
-                'title' => $this->l('Delete customers !', 'AdminCleanCustomerController'),
+                'title' => $this->module->l('Delete customers !', 'AdminCleanCustomerController'),
             ],
         ];
 
@@ -255,7 +255,7 @@ class AdminCleanCustomerController extends ModuleAdminController
         parent::setMedia($isNewTheme);
 
         Media::addJsDef([
-            'confirmDeleteLang' => $this->l('I understand this action is not reversible, continue ?'),
+            'confirmDeleteLang' => $this->module->l('I understand this action is not reversible, continue ?'),
         ]);
 
         $this->context->controller->addJS(_PS_MODULE_DIR_ . $this->module->name . '/views/js/plugins/tom-select.complete.min.js');
