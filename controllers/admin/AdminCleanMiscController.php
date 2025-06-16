@@ -33,8 +33,8 @@ class AdminCleanMiscController extends ModuleAdminController
         $this->display = 'view';
         $this->bootstrap = true;
         parent::__construct();
-        $this->meta_title = $this->l('Maintenance & Optimization', 'AdminCleanMiscController');
-        $this->toolbar_title = $this->l('Maintenance & Optimization', 'AdminCleanMiscController');
+        $this->meta_title = $this->module->l('Maintenance & Optimization', 'AdminCleanMiscController');
+        $this->toolbar_title = $this->module->l('Maintenance & Optimization', 'AdminCleanMiscController');
 
         // If module is not active, then return
         if (!$this->module->active) {
@@ -122,20 +122,20 @@ class AdminCleanMiscController extends ModuleAdminController
 
         $emailsForm['form'] = [
             'legend' => [
-                'title' => $this->l('Clean emails', 'AdminCleanMiscController'),
+                'title' => $this->module->l('Clean emails', 'AdminCleanMiscController'),
                 'icon' => 'icon-envelope',
             ],
             'input' => [
                 [
                     'type' => 'text',
-                    'label' => $this->l('Date from', 'AdminCleanMiscController'),
+                    'label' => $this->module->l('Date from', 'AdminCleanMiscController'),
                     'name' => $this->module->config_name . '_EMAIL_DATE_FROM',
                     'class' => 'date_time',
                     'col' => 6,
                 ],
                 [
                     'type' => 'text',
-                    'label' => $this->l('Date to', 'AdminCleanMiscController'),
+                    'label' => $this->module->l('Date to', 'AdminCleanMiscController'),
                     'name' => $this->module->config_name . '_EMAIL_DATE_TO',
                     'class' => 'date_time',
                     'col' => 6,
@@ -146,96 +146,96 @@ class AdminCleanMiscController extends ModuleAdminController
                     'type' => 'button',
                     'class' => 'btn-block',
                     'js' => 'this.previousElementSibling.classList.toggle(\'hidden\');this.classList.toggle(\'hidden\')',
-                    'title' => $this->l('Clean emails ?', 'AdminCleanMiscController'),
+                    'title' => $this->module->l('Clean emails ?', 'AdminCleanMiscController'),
                 ],
             ],
             'submit' => [
                 'name' => 'clean_emails',
                 'class' => 'btn btn-block btn-danger hidden clean_btn',
-                'title' => $this->l('Clean emails !', 'AdminCleanMiscController'),
+                'title' => $this->module->l('Clean emails !', 'AdminCleanMiscController'),
             ],
         ];
 
         $cleanOptimizeForm['form'] = [
             'legend' => [
-                'title' => $this->l('Clean & Optimize', 'AdminCleanMiscController'),
+                'title' => $this->module->l('Clean & Optimize', 'AdminCleanMiscController'),
                 'icon' => 'icon-magic',
             ],
-            'warning' => $this->l('Its STRONGLY RECOMMENDED to BACKUP your database before doing any action below', 'AdminCleanMiscController'),
+            'warning' => $this->module->l('Its STRONGLY RECOMMENDED to BACKUP your database before doing any action below', 'AdminCleanMiscController'),
             'input' => [
                 [
                     'type' => 'switch',
-                    'label' => $this->l('Carts & Admin tabs otimization'),
-                    'desc' => $this->l('Carts not ordered and older than 1 month, carts rules expired, disabled, out of quantity older than 1 month will be deleted, admin tabs will be indexed'),
+                    'label' => $this->module->l('Carts & Admin tabs otimization'),
+                    'desc' => $this->module->l('Carts not ordered and older than 1 month, carts rules expired, disabled, out of quantity older than 1 month will be deleted, admin tabs will be indexed'),
                     'name' => $this->module->config_name . '_CLEAN_OPTIMIZE',
                     'is_bool' => true,
                     'values' => [
                         [
                             'id' => 'active_on',
                             'value' => true,
-                            'label' => $this->l('Enabled'),
+                            'label' => $this->module->l('Enabled'),
                         ],
                         [
                             'id' => 'active_off',
                             'value' => false,
-                            'label' => $this->l('Disabled'),
+                            'label' => $this->module->l('Disabled'),
                         ],
                     ],
                 ],
                 [
                     'type' => 'switch',
-                    'label' => $this->l('Clean Stats & Logs'),
-                    'desc' => $this->l('This option will empty all tables collecting miscellaneous data about traffic, pages viewed, guest... You may be disconnected after.'),
+                    'label' => $this->module->l('Clean Stats & Logs'),
+                    'desc' => $this->module->l('This option will empty all tables collecting miscellaneous data about traffic, pages viewed, guest... You may be disconnected after.'),
                     'name' => $this->module->config_name . '_CLEAN_STATS_LOGS',
                     'is_bool' => true,
                     'values' => [
                         [
                             'id' => 'active_on',
                             'value' => true,
-                            'label' => $this->l('Enabled'),
+                            'label' => $this->module->l('Enabled'),
                         ],
                         [
                             'id' => 'active_off',
                             'value' => false,
-                            'label' => $this->l('Disabled'),
+                            'label' => $this->module->l('Disabled'),
                         ],
                     ],
                 ],
                 [
                     'type' => 'switch',
-                    'label' => $this->l('Check & Fix integrity'),
-                    'desc' => $this->l('This option will run queries to fix broken data, double configuration or inexisting lang configuration, orphans tables associations entries'),
+                    'label' => $this->module->l('Check & Fix integrity'),
+                    'desc' => $this->module->l('This option will run queries to fix broken data, double configuration or inexisting lang configuration, orphans tables associations entries'),
                     'name' => $this->module->config_name . '_FIX_INTEGRITY',
                     'is_bool' => true,
                     'values' => [
                         [
                             'id' => 'active_on',
                             'value' => true,
-                            'label' => $this->l('Enabled'),
+                            'label' => $this->module->l('Enabled'),
                         ],
                         [
                             'id' => 'active_off',
                             'value' => false,
-                            'label' => $this->l('Disabled'),
+                            'label' => $this->module->l('Disabled'),
                         ],
                     ],
                 ],
                 [
                     'type' => 'switch',
-                    'label' => $this->l('Clean files & Caches'),
-                    'desc' => $this->l('This option will clean your Prestashop logs directory, img temporary dir & caches'),
+                    'label' => $this->module->l('Clean files & Caches'),
+                    'desc' => $this->module->l('This option will clean your Prestashop logs directory, img temporary dir & caches'),
                     'name' => $this->module->config_name . '_CLEAN_LOGS_IMG_FILES',
                     'is_bool' => true,
                     'values' => [
                         [
                             'id' => 'active_on',
                             'value' => true,
-                            'label' => $this->l('Enabled'),
+                            'label' => $this->module->l('Enabled'),
                         ],
                         [
                             'id' => 'active_off',
                             'value' => false,
-                            'label' => $this->l('Disabled'),
+                            'label' => $this->module->l('Disabled'),
                         ],
                     ],
                 ],
@@ -245,13 +245,13 @@ class AdminCleanMiscController extends ModuleAdminController
                     'type' => 'button',
                     'class' => 'btn-block',
                     'js' => 'this.previousElementSibling.classList.toggle(\'hidden\');this.classList.toggle(\'hidden\')',
-                    'title' => $this->l('Clean & Optimize ?', 'AdminCleanMiscController'),
+                    'title' => $this->module->l('Clean & Optimize ?', 'AdminCleanMiscController'),
                 ],
             ],
             'submit' => [
                 'name' => 'clean_optimize',
                 'class' => 'btn btn-block btn-danger hidden clean_btn',
-                'title' => $this->l('Clean & Optimize !', 'AdminCleanMiscController'),
+                'title' => $this->module->l('Clean & Optimize !', 'AdminCleanMiscController'),
             ],
         ];
 
@@ -284,7 +284,7 @@ class AdminCleanMiscController extends ModuleAdminController
         parent::setMedia($isNewTheme);
 
         Media::addJsDef([
-            'confirmDeleteLang' => $this->l('I understand this action is not reversible, continue ?'),
+            'confirmDeleteLang' => $this->module->l('I understand this action is not reversible, continue ?'),
         ]);
 
         $this->context->controller->addJS(_PS_MODULE_DIR_ . $this->module->name . '/views/js/' . $this->name . '.js');
