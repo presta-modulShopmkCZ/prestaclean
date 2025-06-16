@@ -210,18 +210,20 @@ class MiscCleaner
         $queries = $this->getCheckAndFixQueries();
 
         foreach ($queries as $query_array) {
+			if (!empty(Db::getInstance()->executeS('SELECT `column_name` FROM INFORMATION_SCHEMA.COLUMNS WHERE `TABLE_NAME` = \''._DB_PREFIX_.bqSQL($query_array[0]).'\''))) {
             // If this is a module and the module is not installed, we continue
-            if (isset($query_array[4]) && !Module::isInstalled($query_array[4])) {
-                continue;
-            }
-
-            $queryDeleteOrphans = $this->db->delete(bqSQL($query_array[0]), '`' . bqSQL($query_array[1]) . '` NOT IN (SELECT `' . bqSQL($query_array[3]) . '` FROM `' . _DB_PREFIX_ . bqSQL($query_array[2]) . '`)');
-            if ($queryDeleteOrphans) {
-                if ($affected_rows = $this->db->Affected_Rows()) {
-                    $this->db->execute('ANALYZE TABLE ' . _DB_PREFIX_ . bqSQL($query_array[0]));
-                    $this->output['Table ' . $query_array[0]] = $affected_rows;
+                if (isset($query_array[4]) && !Module::isInstalled($query_array[4])) {
+                    continue;
                 }
-            }
+    
+                $queryDeleteOrphans = $this->db->delete(bqSQL($query_array[0]), '`' . bqSQL($query_array[1]) . '` NOT IN (SELECT `' . bqSQL($query_array[3]) . '` FROM `' . _DB_PREFIX_ . bqSQL($query_array[2]) . '`)');
+                if ($queryDeleteOrphans) {
+                    if ($affected_rows = $this->db->Affected_Rows()) {
+                        $this->db->execute('ANALYZE TABLE ' . _DB_PREFIX_ . bqSQL($query_array[0]));
+                        $this->output['Table ' . $query_array[0]] = $affected_rows;
+                    }
+                }
+			}
         }
 
         // _lang table cleaning
@@ -491,12 +493,14 @@ class MiscCleaner
         $tables = $this->getStatsAndLogsTables();
 
         foreach ($tables as $table) {
-            $rows_count = $this->db->getValue('SELECT COUNT(*) FROM `' . _DB_PREFIX_ . bqSQL($table) . '`');
-            $queryTruncate = $this->db->execute('TRUNCATE TABLE `' . _DB_PREFIX_ . bqSQL($table) . '`');
-            if ($queryTruncate && $rows_count > 0) {
-                $this->db->execute('ANALYZE TABLE ' . _DB_PREFIX_ . bqSQL($table));
-                $this->output[$this->module->l(sprintf('Table %s cleaned', $table), 'miscCleaner')] = $rows_count;
-            }
+			if (!empty(Db::getInstance()->executeS('SELECT `column_name` FROM INFORMATION_SCHEMA.COLUMNS WHERE `TABLE_NAME` = \''._DB_PREFIX_.bqSQL($table).'\''))) {
+                $rows_count = $this->db->getValue('SELECT COUNT(*) FROM `' . _DB_PREFIX_ . bqSQL($table) . '`');
+                $queryTruncate = $this->db->execute('TRUNCATE TABLE `' . _DB_PREFIX_ . bqSQL($table) . '`');
+                if ($queryTruncate && $rows_count > 0) {
+                    $this->db->execute('ANALYZE TABLE ' . _DB_PREFIX_ . bqSQL($table));
+                    $this->output[$this->module->l(sprintf('Table %s cleaned', $table), 'miscCleaner')] = $rows_count;
+                }
+			}
         }
     }
 
